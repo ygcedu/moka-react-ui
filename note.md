@@ -5,3 +5,4 @@
 5. npx webpack
 6. yarn add webpack-dev-server@3.2.1 --dev
 7. npx webpack-dev-server
+8. yarn add html-webpack-plugin@3.2.0 --dev

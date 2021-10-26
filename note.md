@@ -12,3 +12,4 @@
 12. yarn add @types/react@16.8.7 @types/react-dom@16.8.2 --dev
 13. yarn add cross-env@^5.2.0 --dev
 14. yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer @types/react-test-renderer
+15. yarn add --dev svg-sprite-loader

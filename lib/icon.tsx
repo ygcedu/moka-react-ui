@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './importIcons';
 
 interface IconProps {
   name: string;

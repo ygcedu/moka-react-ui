@@ -10,7 +10,6 @@ ReactDom.render(
   <div>
     <Icon name="wechat" onClick={fn}/>
     <Icon name="alipay"
-          className="qqq"
           onMouseEnter={() => console.log('enter')}
           onMouseLeave={() => console.log('leave')}/>
     <Icon name="qq" onClick={fn}/>

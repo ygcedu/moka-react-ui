@@ -2,10 +2,8 @@ import * as React from 'react';
 import ReactDom from 'react-dom';
 import Icon from './icon';
 
-const fn = (e: React.MouseEvent<SVGElement | SVGUseElement>) => {
-  console.log(e.currentTarget);
-  // 强行断言（武断），消除 ts 警告
-  console.log((e.target as SVGUseElement).href);
+const fn: React.MouseEventHandler = (e) => {
+  console.log(e.target);
 };
 
 ReactDom.render(

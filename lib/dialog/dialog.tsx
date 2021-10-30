@@ -79,11 +79,11 @@ const confirm = (content: string, yes?: () => void, no?: () => void) => {
     <button onClick={onNo}>no</button>
   ];
 
-  const close = modal(content, buttons);
+  const close = modal(content, buttons, no);
 };
 
-const modal = (content: ReactNode, buttons?: Array<ReactElement>) => {
-  const onClose = () => {
+const modal = (content: ReactNode, buttons?: Array<ReactElement>, afterClose?: () => void) => {
+  const close = () => {
     // 1. 组件不可见
     ReactDOM.render(React.cloneElement(component, {visible: false}), div);
     // 2. 卸载组件
@@ -96,13 +96,16 @@ const modal = (content: ReactNode, buttons?: Array<ReactElement>) => {
     <Dialog
       visible={true}
       buttons={buttons}
-      onClose={onClose}>
+      onClose={() => {
+        close();
+        afterClose && afterClose();
+      }}>
       {content}
     </Dialog>;
   const div = document.createElement('div');
   document.body.append(div);
   ReactDOM.render(component, div);
-  return onClose;
+  return close;
 };
 
 export {alert, confirm, modal};

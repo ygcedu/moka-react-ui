@@ -37,12 +37,15 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
         <main className={sc('main')}>
           {props.children}
         </main>
-        <footer className={sc('footer')}>
-          {/*todo:会性能损失*/}
-          {props.buttons && props.buttons.map((button, index) =>
-            React.cloneElement(button, {key: index})
-          )}
-        </footer>
+        {
+          props.buttons && props.buttons.length > 0 &&
+          <footer className={sc('footer')}>
+            {/*todo:会性能损失*/}
+            {props.buttons && props.buttons.map((button, index) =>
+              React.cloneElement(button, {key: index})
+            )}
+          </footer>
+        }
       </div>
     </Fragment> : null;
 
@@ -56,15 +59,22 @@ Dialog.defaultProps = {
 };
 
 const alert = (content: string) => {
-  // 动态创建组件
-  const component = <Dialog visible={true} onClose={() => {
+  const onClose = () => {
     // 1. 组件不可见
     ReactDOM.render(React.cloneElement(component, {visible: false}), div);
     // 2. 卸载组件
     ReactDOM.unmountComponentAtNode(div);
     // 3. 移除临时创建的 div 标签
     div.remove();
-  }}>{content}</Dialog>;
+  };
+  // 动态创建组件
+  const component =
+    <Dialog
+      visible={true}
+      buttons={[<button onClick={onClose}>OK</button>]}
+      onClose={onClose}>
+      {content}
+    </Dialog>;
   const div = document.createElement('div');
   document.body.append(div);
   ReactDOM.render(component, div);

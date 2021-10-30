@@ -9,6 +9,7 @@ interface Props {
   buttons?: Array<ReactElement>
   onClose: React.MouseEventHandler
   closeOnClickMask?: boolean
+  enableMask?: boolean
 }
 
 const scopedClass = scopedClassMaker('mk-dialog');
@@ -25,10 +26,11 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
     }
   };
 
-  const x = props.visible ?
+  const result = props.visible ?
     <Fragment>
-      <div className={sc('mask')} onClick={onClickMask}>
-      </div>
+      {
+        props.enableMask && <div className={sc('mask')} onClick={onClickMask}></div>
+      }
       <div className={sc()}>
         <div className={sc('close')} onClick={onClickClose}>
           <Icon name="close"/>
@@ -50,12 +52,14 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
     </Fragment> : null;
 
   return (
-    ReactDOM.createPortal(x, document.body)
+    // 传送门直接把元素传递到 body 上
+    ReactDOM.createPortal(result, document.body)
   );
 };
 
 Dialog.defaultProps = {
-  closeOnClickMask: false
+  closeOnClickMask: false,
+  enableMask: true
 };
 
 const alert = (content: string) => {

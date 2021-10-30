@@ -4,6 +4,7 @@ import Dialog, {alert, confirm, modal} from './dialog';
 export default function () {
   const [x, setX] = useState(false);
   const [y, setY] = useState(false);
+  const [z, setZ] = useState(false);
   const openModal = () => {
     // modal 函数返回一个关闭弹框的函数定义
     const close = modal(<h1>你好
@@ -40,6 +41,19 @@ export default function () {
 
       <div>
         <h1>example 3</h1>
+        <button onClick={() => setZ(!z)}>click</button>
+        <Dialog visible={z} enableMask={false} buttons={
+          [
+            <button onClick={() => {setZ(false);}}>1</button>,
+            <button onClick={() => {setZ(false);}}>2</button>,
+          ]
+        } onClose={() => {setZ(false);}}>
+          <strong>hi</strong>
+        </Dialog>
+      </div>
+
+      <div>
+        <h1>example 4</h1>
         <button onClick={() => alert('1')}>alert</button>
         <button onClick={() => confirm('1', () => {
           console.log('你点击了yes');
@@ -50,7 +64,7 @@ export default function () {
       </div>
 
       <div>
-        <h1>example 4</h1>
+        <h1>example 5</h1>
         <button onClick={openModal}>modal
         </button>
       </div>

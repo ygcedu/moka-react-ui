@@ -1,16 +1,22 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, ReactElement} from 'react';
 import './dialog.scss';
 import {Icon} from '../index';
 import {scopedClassMaker} from '../classes';
 
 interface Props {
   visible: boolean
+  buttons: Array<ReactElement>
+  onClose: React.MouseEventHandler
 }
 
 const scopedClass = scopedClassMaker('mk-dialog');
 const sc = scopedClass;
 
 const Dialog: React.FunctionComponent<Props> = (props) => {
+  const onClickClose: React.MouseEventHandler = (e) => {
+    props.onClose(e);
+  };
+
   return (
     // props.children 可能不是组件
     props.visible ?
@@ -18,7 +24,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
         <div className={sc('mask')}>
         </div>
         <div className={sc()}>
-          <div className={sc('close')}>
+          <div className={sc('close')} onClick={onClickClose}>
             <Icon name="close"/>
           </div>
           <header className={sc('header')}>提示</header>
@@ -26,8 +32,10 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
             {props.children}
           </main>
           <footer className={sc('footer')}>
-            <button>ok</button>
-            <button>cancel</button>
+            {/*todo:会性能损失*/}
+            {props.buttons.map((button, index) =>
+              React.cloneElement(button, {key: index})
+            )}
           </footer>
         </div>
       </Fragment>

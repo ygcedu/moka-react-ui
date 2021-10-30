@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Dialog, {alert, confirm} from './dialog';
+import Dialog, {alert, confirm, modal} from './dialog';
 
 export default function () {
   const [x, setX] = useState(false);
@@ -40,6 +40,12 @@ export default function () {
         }, () => {
           console.log('你点击了no');
         })}>confirm
+        </button>
+      </div>
+
+      <div>
+        <h1>example 4</h1>
+        <button onClick={() => modal(<h1>你好</h1>)}>modal
         </button>
       </div>
     </div>);

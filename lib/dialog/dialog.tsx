@@ -1,4 +1,4 @@
-import React, {Fragment, ReactElement} from 'react';
+import React, {Fragment, ReactElement, ReactFragment, ReactNode} from 'react';
 import './dialog.scss';
 import {Icon} from '../index';
 import {scopedClassMaker} from '../classes';
@@ -99,5 +99,20 @@ const confirm = (content: string, yes?: () => void, no?: () => void) => {
   ReactDOM.render(component, div);
 };
 
-export {alert, confirm};
+const modal = (content: ReactNode | ReactFragment) => {
+  const onClose = () => {
+    ReactDOM.render(React.cloneElement(component, {visible: false}), div);
+    ReactDOM.unmountComponentAtNode(div);
+    div.remove();
+  };
+  const component = (
+    <Dialog visible={true} onClose={onClose}>
+      {content}
+    </Dialog>);
+  const div = document.createElement('div');
+  document.body.appendChild(div);
+  ReactDOM.render(component, div);
+};
+
+export {alert, confirm, modal};
 export default Dialog;

@@ -7,6 +7,7 @@ interface Props {
   visible: boolean
   buttons: Array<ReactElement>
   onClose: React.MouseEventHandler
+  closeOnClickMask?: boolean
 }
 
 const scopedClass = scopedClassMaker('mk-dialog');
@@ -17,11 +18,17 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
     props.onClose(e);
   };
 
+  const onClickMask: React.MouseEventHandler = (e) => {
+    if (props.closeOnClickMask) {
+      props.onClose(e);
+    }
+  };
+
   return (
     // props.children 可能不是组件
     props.visible ?
       <Fragment>
-        <div className={sc('mask')}>
+        <div className={sc('mask')} onClick={onClickMask}>
         </div>
         <div className={sc()}>
           <div className={sc('close')} onClick={onClickClose}>
@@ -41,6 +48,10 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
       </Fragment>
       : null
   );
+};
+
+Dialog.defaultProps = {
+  closeOnClickMask: false
 };
 
 export default Dialog;

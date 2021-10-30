@@ -112,6 +112,7 @@ const modal = (content: ReactNode | ReactFragment) => {
   const div = document.createElement('div');
   document.body.appendChild(div);
   ReactDOM.render(component, div);
+  return onClose;
 };
 
 export {alert, confirm, modal};

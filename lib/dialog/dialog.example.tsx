@@ -4,6 +4,12 @@ import Dialog, {alert, confirm, modal} from './dialog';
 export default function () {
   const [x, setX] = useState(false);
   const [y, setY] = useState(false);
+  const openModal = () => {
+    // modal 函数返回一个关闭弹框的函数定义
+    const close = modal(<h1>你好
+      <button onClick={() => close()}>close</button>
+    </h1>);
+  };
   return (
     <div>
       <div>
@@ -45,7 +51,7 @@ export default function () {
 
       <div>
         <h1>example 4</h1>
-        <button onClick={() => modal(<h1>你好</h1>)}>modal
+        <button onClick={openModal}>modal
         </button>
       </div>
     </div>);

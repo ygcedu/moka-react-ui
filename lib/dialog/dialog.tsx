@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 
 interface Props {
   visible: boolean
-  buttons: Array<ReactElement>
+  buttons?: Array<ReactElement>
   onClose: React.MouseEventHandler
   closeOnClickMask?: boolean
 }
@@ -39,7 +39,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
         </main>
         <footer className={sc('footer')}>
           {/*todo:会性能损失*/}
-          {props.buttons.map((button, index) =>
+          {props.buttons && props.buttons.map((button, index) =>
             React.cloneElement(button, {key: index})
           )}
         </footer>
@@ -55,4 +55,20 @@ Dialog.defaultProps = {
   closeOnClickMask: false
 };
 
+const alert = (content: string) => {
+  // 动态创建组件
+  const component = <Dialog visible={true} onClose={() => {
+    // 1. 组件不可见
+    ReactDOM.render(React.cloneElement(component, {visible: false}), div);
+    // 2. 卸载组件
+    ReactDOM.unmountComponentAtNode(div);
+    // 3. 移除临时创建的 div 标签
+    div.remove();
+  }}>{content}</Dialog>;
+  const div = document.createElement('div');
+  document.body.append(div);
+  ReactDOM.render(component, div);
+};
+
+export {alert};
 export default Dialog;

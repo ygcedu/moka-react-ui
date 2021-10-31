@@ -12,12 +12,12 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 const Layout: React.FunctionComponent<Props> = (props) => {
   const {className, ...rest} = props;
   const children = props.children as Array<ReactElement>;
-  const hasAside = children.length &&
+  const hasAside = 'length' in children &&
     // || 短路逻辑实现判断数组中是否包含真值
     children.reduce((result, node) => result || node.type === Aside, false);
 
   return (
-    <div className={sc('', {extra: [className, hasAside && 'hasAside'].join(' ')})} {...rest}>
+    <div className={sc({'': true, hasAside}, {extra: className})} {...rest}>
       {props.children}
     </div>
   );

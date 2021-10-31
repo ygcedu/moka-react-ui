@@ -13,3 +13,6 @@
 13. yarn add cross-env@^5.2.0 --dev
 14. yarn add --dev jest babel-jest @babel/preset-env @babel/preset-react react-test-renderer @types/react-test-renderer
 15. yarn add --dev svg-sprite-loader
+
+git branch gh-pages  
+git push origin gh-pages:gh-pages

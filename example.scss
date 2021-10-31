@@ -25,11 +25,20 @@ a {
   color: inherit;
 }
 
+pre {
+  font-family: "Fira Code Medium", Consolas, monospace;
+}
+
 $padding: 16px;
 $main-color: #00ADB5;
 $border-color: #eee;
+body {
+  font-size: 16px;
+}
+
 .site-page {
   background: #ffffff;
+  min-height: 100vh;
 }
 
 .site-main {
@@ -39,7 +48,6 @@ $border-color: #eee;
 .site-header {
   background: $border-color;
   padding: 8px 0;
-
   .logo {
     padding: 0 $padding;
     display: flex;
@@ -55,7 +63,6 @@ $border-color: #eee;
     }
   }
 }
-
 .site-aside {
   border-right: 1px solid #EEEEEE;
   margin-right: 16px;
@@ -66,14 +73,33 @@ $border-color: #eee;
   }
 
   ul {
-    padding: 0 $padding;
     min-width: 12em;
 
     > li {
-      padding: 8px 0;
+      position: relative;
 
       a {
-        color: $main-color;
+        color: #333;
+        display: block;
+        padding: 8px $padding;
+
+        &:hover {
+          color: $main-color;
+        }
+
+        &.active {
+          color: white;
+          background: $main-color;
+
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            border-right: 3px solid desaturate($main-color, 20%);
+          }
+        }
       }
     }
   }
@@ -85,4 +111,8 @@ $border-color: #eee;
   color: #666;
   padding: 16px 0;
   border-top: 1px solid $border-color;
+}
+
+.example {
+  padding: 16px 0;
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter as Router, NavLink, Route} from 'react-router-dom';
-import IconExample from './lib/icon/icon.example';
 import DialogExample from './lib/dialog/dialog.example';
 import ButtonExample from './lib/button.example';
 import LayoutExample from './lib/layout/layout.example';
 import {Aside, Content, Footer, Header, Layout} from './lib/layout/layout';
 import './example.scss';
+import IconDemo from './lib/icon/icon.demo';
 
 const logo = require('./logo.png');
 
@@ -35,7 +35,7 @@ ReactDOM.render(
           </ul>
         </Aside>
         <Content className="site-main">
-          <Route path="/icon" component={IconExample}/>
+          <Route path="/icon" component={IconDemo}/>
           <Route path="/button" component={ButtonExample}/>
           <Route path="/dialog" component={DialogExample}/>
           <Route path="/layout" component={LayoutExample}/>

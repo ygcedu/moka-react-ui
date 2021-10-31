@@ -1,7 +1,7 @@
 import React, {ReactElement} from 'react';
-import {scopedClassMaker} from '../classes';
 import './layout.scss';
 import Aside from './aside';
+import {scopedClassMaker} from '../helpers/classes';
 
 const sc = scopedClassMaker('mk-layout');
 
